@@ -1,30 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling when in full screen */
+}
 
 .envelope {
   position: relative;
-  width: 600px;
-  height: 400px;
-  margin: 50px auto;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
   cursor: pointer;
   perspective: 1000px;
-  background: url('https://static.vecteezy.com/system/resources/previews/010/029/965/non_2x/love-letter-pattern-texture-with-text-effect-on-a-white-background-valentine-s-day-special-seamless-pattern-design-with-love-shapes-love-endless-pattern-decoration-for-bed-sheets-and-wallpapers-vector.jpg');
+  background: url('https://static.vecteezy.com/system/resources/previews/010/029/965/non_2x/love-letter-pattern-texture-with-text-effect-on-a-white-background-valentine-s-day-special-seamless-pattern-design-with-love-shapes-love-endless-pattern-decoration-for-bed-sheets-and-wallpapers-vector.jpg') no-repeat center center / cover;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.6s ease;
+  transition: box-shadow 0.6s ease; /* Smooth transition for box-shadow */
 }
-
 
 .flap {
   position: absolute;
   width: 100%;
   height: 50%;
-  background: url('https://static.vecteezy.com/system/resources/previews/010/029/965/non_2x/love-letter-pattern-texture-with-text-effect-on-a-white-background-valentine-s-day-special-seamless-pattern-design-with-love-shapes-love-endless-pattern-decoration-for-bed-sheets-and-wallpapers-vector.jpg');
+  background: inherit;
   transform-origin: bottom;
-  transition: transform 0.8s ease;
+  transition: transform 1s ease; /* Slower flap transition */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  position: relative;
 }
 
 .flap-text {
@@ -33,14 +38,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 36px;
-  /* Increase font size */
   color: black;
-  /* Change to your preferred color */
   font-weight: bold;
-  /* Make the text bold */
   text-align: center;
   font-family: 'Lobster', cursive;
-  /* Update with your chosen font */
 }
 
 .body {
@@ -48,11 +49,12 @@
   top: 50%;
   width: 100%;
   height: 50%;
-  background: url('https://static.vecteezy.com/system/resources/previews/010/029/965/non_2x/love-letter-pattern-texture-with-text-effect-on-a-white-background-valentine-s-day-special-seamless-pattern-design-with-love-shapes-love-endless-pattern-decoration-for-bed-sheets-and-wallpapers-vector.jpg');
+  background: inherit;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   z-index: -1;
   box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: z-index 0.6s ease; /* Smooth z-index transition */
 }
 
 .letter {
@@ -63,11 +65,11 @@
   height: 50%;
   background-color: #fafafa;
   overflow: hidden;
-  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: opacity 1s ease, transform 1s ease; /* Smooth transition for opacity and transform */
   transform-origin: bottom;
   z-index: -2;
   opacity: 0;
-  font-family: "Sedan", serif;
+  font-family: 'Roboto', sans-serif; /* Use Roboto for the body of the letter */
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
@@ -81,25 +83,21 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.letter.fullSize {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80vw; /* Take 80% of viewport width */
-  height: auto; /* Dynamically adjust height based on content */
-  opacity: 1;
-  z-index: 999;
-  background-color: #fff;
-  padding: 30px;
-  margin-top: 20%; /* Adjust this value to create space from the top */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  font-size: 22px;
-  text-align: center;
-  border-radius: 12px;
-  overflow: hidden; /* Default: no overflow */
+.open .body {
+  z-index: 0;
 }
 
+.letter.fullSize {
+  top: 0;
+  height: 100%;
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1) translateY(0); /* Adjust position */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  animation: slideIn 1s ease forwards; /* Use slideIn animation */
+}
+
+/* Stamp container styles */
 .stamp-container {
   position: absolute;
   bottom: 20px;
@@ -111,40 +109,25 @@
   height: 80px;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .envelope {
-    width: 90%;
-    min-height: 300px;
+/* Keyframe animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly lower */
   }
-
-  .letter {
-    font-size: 16px;
-    padding: 15px;
-  }
-
-  .letter.fullSize {
-    margin-top: 40%;
-    max-height: 80vh; /* Limit height for mobile */
-    overflow-y: auto; /* Enable vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End in place */
   }
 }
 
-@media (max-width: 768px) {
-  .envelope {
-    width: 100%;
-    min-height: 250px;
-    margin: 20px 0;
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0); /* Start in place */
   }
-
-  .letter {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .letter.fullSize {
-    font-size: 16px;
-    padding: 15px;
+  to {
+    opacity: 0;
+    transform: translateY(-20px); /* Move slightly up */
   }
 }
