@@ -68,8 +68,9 @@ body {
   transition: opacity 1s ease, transform 1s ease; /* Smooth transition for opacity and transform */
   transform-origin: bottom;
   z-index: -2;
+  font-family: 'Roboto', sans-serif;
   opacity: 0;
-  font-family: 'Roboto', sans-serif; /* Use Roboto for the body of the letter */
+  font-family: "Sedan", serif;
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
@@ -98,15 +99,15 @@ body {
 }
 
 /* Stamp container styles */
-.stamp-container {
+/* .stamp-container {
   position: absolute;
   bottom: 20px;
   right: 20px;
-}
+} */
 
 .stamp {
-  width: 80px;
-  height: 80px;
+  width: 80%;
+  height: 80%;
 }
 
 /* Keyframe animations */

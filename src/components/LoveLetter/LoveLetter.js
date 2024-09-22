@@ -26,7 +26,9 @@ const LoveLetter = () => {
   return (
     <div className={`envelope ${isOpen ? 'open' : ''}`} onClick={isOpen ? handleCloseLetter : handleOpenLetter}>
       <div className={`flap ${isOpen ? 'open' : ''}`}>
-        <div className="flap-text">Meow🐈</div>
+        <div className="flap-text">
+          <img src="design.png" alt="Stamp" className="stamp" />
+        </div>
       </div>
       <div className={`body ${isOpen ? 'open' : ''}`}></div>
       <div className={`letter ${isOpen ? 'fullSize' : ''}`}>
@@ -39,9 +41,9 @@ const LoveLetter = () => {
           With all my love,<br />
           Yours forever,<br /> Hubby 💕
         </p>
-        <div className="stamp-container">
+        {/* <div className="stamp-container">
           <img src="design.png" alt="Stamp" className="stamp" />
-        </div>
+        </div> */}
       </div>
       <audio ref={audioRef} src={audioFile} onError={(e) => console.error('Audio error:', e.message)} />
     </div>
